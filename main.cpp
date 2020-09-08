@@ -48,11 +48,10 @@ int main() {
     srand(time(0));
 
     Node node = generateList();
-    while (node.next) {
-        std::cout << node.value << " ";
-        node = *node.next;
+
+    for (Node::iterator it = &node; it != nullptr; it++) {
+        std::cout << (*it).value << " ";
     }
-    std::cout << node.value << " ";
 
     return 0;
 }

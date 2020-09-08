@@ -20,10 +20,10 @@ Node generateList() {
 
     // Fills list until luck runs out
     auto fill = [](Node** currentNode, float terminationChance) {
-        while (!chance(terminationChance)) {
+        for (Node::iterator it = (*currentNode); !chance(terminationChance); it++) {
             Node *nextNode = new Node { .value = getValue(), .next = nullptr };
-            (*currentNode)->next = nextNode;
-            (*currentNode) = (*currentNode)->next;
+            (*it).next = nextNode;
+            (*currentNode) = &(*it);
         }
     };
 

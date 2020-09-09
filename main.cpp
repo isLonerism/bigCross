@@ -49,20 +49,23 @@ Node* snakeOrSnail(Node *head) {
 
     // Slow pointer is incremented by 1, fast by 2
     Node::iterator slowPointer = head;
-    Node::iterator fastPointer = ++slowPointer;
+    Node::iterator fastPointer = head;
 
     // Increment until reached the same node or null
     do {
-        if (fastPointer == nullptr || ++fastPointer == nullptr) {
+        if (++fastPointer == nullptr || ++fastPointer == nullptr) {
             return nullptr;
         }
-    } while (slowPointer++ != fastPointer++);
+    } while (++slowPointer != fastPointer);
 
     // Distance from meeting point + distance from head to loop start
     // is a MULTIPLE of loop length
     // Therefore the following pointers are guaranteed to meet
-    (slowPointer = head)++;
-    while (++slowPointer != ++fastPointer);
+    slowPointer = head;
+
+    if ((slowPointer = head) != fastPointer) {
+        while (++slowPointer != ++fastPointer);
+    }
 
     return &(*slowPointer);
 }
@@ -72,20 +75,19 @@ void printList(Node *head) {
 
     Node *loopStart = snakeOrSnail(head);
     Node::iterator it = head;
-    int atStart = 0, listLength = 0, loopLength = 0;
+    int atStart = 0, listLength = -1, loopLength = 0;
 
     // Print node values
-    std::cout << it;
     do {
-        if (&(*++it) == loopStart && loopStart != nullptr) {
-            std::cout << (++atStart == 1 ? " [ " + std::to_string((*it).value) : " ] ");
+        if (&(*it) == loopStart && loopStart != nullptr) {
+            std::cout << (++atStart == 1 ? "[ " + std::to_string((*it).value) + " -> " : "]");
         } else {
-            std::cout << " -> " << it;
+            std::cout << it << (it == nullptr ? "" : " -> ");
         }
 
         listLength++;
         loopLength += (atStart == 1);
-    } while (it != nullptr && atStart < 2);
+    } while (it++ != nullptr && atStart < 2);
 
     // Print metadata
     std::cout << "\n\n" << (loopStart ? "Snail" : "Snake") << " length: " << listLength << std::endl;

@@ -44,12 +44,31 @@ Node generateList() {
     return head;
 }
 
+// Method 2
+Node* snakeOrSnail(Node *head) {
+
+    Node::iterator slowPointer = head;
+    Node::iterator fastPointer = ++slowPointer;
+
+    do {
+        if (fastPointer == nullptr || ++fastPointer == nullptr) {
+            return nullptr;
+        }
+    } while (slowPointer++ != fastPointer++);
+
+    (slowPointer = head)++;
+    while (++slowPointer != ++fastPointer);
+
+    return &(*slowPointer);
+}
+
 int main() {
     srand(time(0));
 
     Node node = generateList();
 
-    for (Node::iterator it = &node; it != nullptr; it++) {
+    int lim = 0;
+    for (Node::iterator it = &node; it != nullptr && lim++ != 500; it++) {
         std::cout << (*it).value << " ";
     }
 

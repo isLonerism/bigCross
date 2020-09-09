@@ -1,5 +1,7 @@
 // node.h
 
+#include <iostream>
+
 struct Node {
     int value;
     Node *next;
@@ -14,5 +16,12 @@ struct Node {
         bool operator==(const iterator& it) const { return n == it.n; }
         bool operator!=(const iterator& it) const { return n != it.n; }
         Node& operator*() { return *n; }
+
+        friend std::ostream& operator<<(std::ostream& os, const iterator& it);
     };
 };
+
+std::ostream& operator<<(std::ostream& os, const Node::iterator& it) {
+    os << (it.n == nullptr ? "null" : std::to_string((*it.n).value));
+    return os;
+}

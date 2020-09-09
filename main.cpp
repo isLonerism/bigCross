@@ -62,15 +62,28 @@ Node* snakeOrSnail(Node *head) {
     return &(*slowPointer);
 }
 
+// Method 3
+void printList(Node *head) {
+
+    Node* loopStart = snakeOrSnail(head);
+    Node::iterator it = head;
+    int atStart = 0;
+
+    // Print node values
+    std::cout << it;
+    do {
+        if (&(*++it) == loopStart && loopStart != nullptr) {
+            std::cout << (++atStart == 1 ? " [ " + std::to_string((*it).value) : " ] ");
+        } else {
+            std::cout << " -> " << it;
+        }
+    } while (it != nullptr && atStart < 2);
+
+}
+
 int main() {
     srand(time(0));
 
     Node node = generateList();
-
-    int lim = 0;
-    for (Node::iterator it = &node; it != nullptr && lim++ != 500; it++) {
-        std::cout << (*it).value << " ";
-    }
-
-    return 0;
+    printList(&node);
 }

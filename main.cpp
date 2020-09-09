@@ -61,8 +61,6 @@ Node* snakeOrSnail(Node *head) {
     // Distance from meeting point + distance from head to loop start
     // is a MULTIPLE of loop length
     // Therefore the following pointers are guaranteed to meet
-    slowPointer = head;
-
     if ((slowPointer = head) != fastPointer) {
         while (++slowPointer != ++fastPointer);
     }

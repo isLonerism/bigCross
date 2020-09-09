@@ -1,9 +1,11 @@
-# Data Structures Course
+# Snake or Snail
 
-Data Structures course assignments, College of Management Academic Studies, 1st Year
+Generate a snake linked list or a snail linked list and print them out accordingly.
 
-## Assignments
+# Assignment
 
-Each branch within this repo represents an assignment:
-
-- **bigCross**: find the biggest '+' within the generated matrices
+- Implement a method which randomly generates a snake (not looped) or a snail (looped) linked list
+- Implement a method which receives a linked list and returns:
+  - null if linked list is a snake
+  - pointer to a node at which the loop begins if linked list is a snail
+- Implement a method which prints the linked list according to its type and their lengths

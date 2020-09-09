@@ -47,15 +47,20 @@ Node generateList() {
 // Method 2
 Node* snakeOrSnail(Node *head) {
 
+    // Slow pointer is incremented by 1, fast by 2
     Node::iterator slowPointer = head;
     Node::iterator fastPointer = ++slowPointer;
 
+    // Increment until reached the same node or null
     do {
         if (fastPointer == nullptr || ++fastPointer == nullptr) {
             return nullptr;
         }
     } while (slowPointer++ != fastPointer++);
 
+    // Distance from meeting point + distance from head to loop start
+    // is a MULTIPLE of loop length
+    // Therefore the following pointers are guaranteed to meet
     (slowPointer = head)++;
     while (++slowPointer != ++fastPointer);
 
@@ -77,7 +82,7 @@ void printList(Node *head) {
         } else {
             std::cout << " -> " << it;
         }
-        
+
         listLength++;
         loopLength += (atStart == 1);
     } while (it != nullptr && atStart < 2);
@@ -91,6 +96,7 @@ void printList(Node *head) {
 int main() {
     srand(time(0));
 
+    // Generate and print a list
     Node node = generateList();
     printList(&node);
 }

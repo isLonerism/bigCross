@@ -11,7 +11,7 @@ struct Node {
     public:
         iterator(Node* n) : n(n) {}
         iterator(const iterator& it) :n(it.n) {}
-        iterator& operator++() { n = n->next; return *this; }
+        iterator& operator++() { if (n) { n = n->next; } return *this; }
         iterator operator++(int) { iterator tmp(*this); operator++(); return tmp; }
         bool operator==(const iterator& it) const { return n == it.n; }
         bool operator!=(const iterator& it) const { return n != it.n; }

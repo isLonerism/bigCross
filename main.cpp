@@ -65,9 +65,9 @@ Node* snakeOrSnail(Node *head) {
 // Method 3
 void printList(Node *head) {
 
-    Node* loopStart = snakeOrSnail(head);
+    Node *loopStart = snakeOrSnail(head);
     Node::iterator it = head;
-    int atStart = 0;
+    int atStart = 0, listLength = 0, loopLength = 0;
 
     // Print node values
     std::cout << it;
@@ -77,7 +77,14 @@ void printList(Node *head) {
         } else {
             std::cout << " -> " << it;
         }
+        
+        listLength++;
+        loopLength += (atStart == 1);
     } while (it != nullptr && atStart < 2);
+
+    // Print metadata
+    std::cout << "\n\n" << (loopStart ? "Snail" : "Snake") << " length: " << listLength << std::endl;
+    std::cout << (loopLength ? "Loop length: " + std::to_string(loopLength) + "\n" : "");
 
 }
 

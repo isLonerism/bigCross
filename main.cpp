@@ -16,11 +16,12 @@ Tree BuildTree() {
     int index = -1;
     while (!points[++index]);
     Tree root = { .point = { .x = index % VALUE_RANGE, .y = index / VALUE_RANGE } };
+    Tree *pRoot = &root;
 
     // insert all points
     while (++index < VALUE_RANGE * VALUE_RANGE) {
         if (points[index]) {
-            root.insert({ .x = index % VALUE_RANGE, .y = index / VALUE_RANGE });
+            pRoot = AVL::insert(pRoot, { .x = index % VALUE_RANGE, .y = index / VALUE_RANGE });
         }
     }
 
@@ -32,8 +33,8 @@ int main() {
     srand(time(0));
 
     Tree root = BuildTree();
-
     Tree *p = &root;
+
     while (p) {
         std::cout << "(" << p->point.x << ", " << p->point.y << ") ";
         p = p->right;

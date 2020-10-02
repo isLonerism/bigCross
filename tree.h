@@ -3,6 +3,8 @@
 struct Point {
     int x;
     int y;
+
+    friend std::ostream& operator<<(std::ostream& os, const Point& p);
 };
 
 struct Tree {
@@ -89,3 +91,8 @@ class AVL {
         return t;
     }
 };
+
+std::ostream& operator<<(std::ostream& os, const Point& p) {
+    os << "(" << p.x << ", " << p.y << ")";
+    return os;
+}

@@ -5,7 +5,7 @@
 #define VALUE_RANGE 100
 #define POINTS_AMOUNT 1000
 
-Tree BuildTree() {
+Tree* BuildTree(Tree *t) {
 
     // generate random points
     bool points[VALUE_RANGE * VALUE_RANGE] = { false };
@@ -15,30 +15,51 @@ Tree BuildTree() {
     // build tree root from first point
     int index = -1;
     while (!points[++index]);
-    Tree root = { .point = { .x = index % VALUE_RANGE, .y = index / VALUE_RANGE } };
-    Tree *pRoot = &root;
+    t = new Tree { .point = { .x = index % VALUE_RANGE, .y = index / VALUE_RANGE }, .left = nullptr, .right = nullptr };
 
     // insert all points
     while (++index < VALUE_RANGE * VALUE_RANGE) {
         if (points[index]) {
-            pRoot = AVL::insert(pRoot, { .x = index % VALUE_RANGE, .y = index / VALUE_RANGE });
+            t = AVL::insert(t, { .x = index % VALUE_RANGE, .y = index / VALUE_RANGE });
         }
     }
 
-    return root;
+    return t;
+}
+
+Point NearestRightPoint(Tree *t, int x0) {
+    Point nearest = { .x = 0, .y = 0 };
+    Tree *p = t;
+
+    while (p) {
+
+        // if a new closest point is found
+        if (p->point.x > x0 && (nearest.x == 0 || p->point.x < nearest.x)) {
+            nearest = p->point;
+        }
+
+        // traverse AVL tree based on the current value
+        if (p->point.x <= x0) {
+            p = p->right;
+        } else {
+            p = p->left;
+        }
+    }
+
+    return nearest;
 }
 
 int main() {
     
     srand(time(0));
 
-    Tree root = BuildTree();
-    Tree *p = &root;
+    // build random tree
+    Tree *pRoot = nullptr;
+    pRoot = BuildTree(pRoot);
 
-    while (p) {
-        std::cout << "(" << p->point.x << ", " << p->point.y << ") ";
-        p = p->right;
-    }
+    // find nearest right point
+    Point ans = NearestRightPoint(pRoot, 25);
+    std::cout << ans;
 
     return 1;
 }

@@ -1,9 +1,8 @@
-# Data Structures Course
+# Nearest Right Point
 
-Data Structures course assignments, College of Management Academic Studies, 1st Year
+Generate a binary tree with matrix coordinates and find the nearest right point from a given line.
 
-## Assignments
+# Assignment
 
-Each branch within this repo represents an assignment:
-
-- **bigCross**: find the biggest '+' within the generated matrices
+- Implement a method which randomly generates a binary tree with random points
+- Implement a method which finds the closest right point from a given line with O(log(n)) time complexity

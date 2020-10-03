@@ -8,3 +8,4 @@ Each branch within this repo represents an assignment:
 
 - **bigCross**: find the biggest '+' within the generated matrices
 - **snakeOrSnail**: generate a snake linked list or a snail linked list and print them out accordingly
+- **nearestRightPoint**: generate a binary tree with matrix coordinates and find the nearest right point from a given line

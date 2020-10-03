@@ -13,12 +13,8 @@ Tree* BuildTree(Tree *t) {
     std::fill(points, points + (POINTS_AMOUNT * sizeof(bool)), true);
     std::random_shuffle(points, points + (MATRIX_X * MATRIX_Y));
 
-    // build tree root from first point
-    int index = -1;
-    while (!points[++index]);
-    t = new Tree { .point = { .x = index % MATRIX_X, .y = index / MATRIX_X }, .left = nullptr, .right = nullptr };
-
     // insert all points
+    int index = -1;
     while (++index < MATRIX_X * MATRIX_Y) {
         if (points[index]) {
             t = AVL::insert(t, { .x = index % MATRIX_X, .y = index / MATRIX_X });

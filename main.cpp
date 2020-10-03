@@ -66,26 +66,28 @@ void printMatrix(Tree *t, int x0) {
     fill(matrix, p);
 
     // print matrix
-    for (int i = 0; i < MATRIX_Y; i++) {
-        for (int j = 0; j < MATRIX_X; j++) {
-            std::cout << (j == x0 ? "|" : (matrix[i][j] ? "*" : " "));
+    for (int y = 0; y < MATRIX_Y; y++) {
+        for (int x = 0; x < MATRIX_X; x++) {
+            std::cout << (x == x0 ? "|" : (matrix[y][x] ? "*" : " "));
         }
         std::cout << "\n";
     }
 }
 
-int main() {
+int main(int argc, char **argv) {
     
     srand(time(0));
-    int x0 = 45;
+
+    // definitions
+    Tree *pRoot = nullptr;
+    int x0 = atoi(argv[1]);
 
     // build random tree
-    Tree *pRoot = nullptr;
     pRoot = BuildTree(pRoot);
 
     // display matrix
     printMatrix(pRoot, x0);
 
     // find nearest right point
-    std::cout << NearestRightPoint(pRoot, x0);
+    std::cout << "\nNearest right point: " << NearestRightPoint(pRoot, x0);
 }
